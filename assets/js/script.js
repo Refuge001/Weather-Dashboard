@@ -33,7 +33,7 @@ function searchFunction() {
       var iconID = (response.list[position].weather[0].icon) // find icon ID for website URL lookup
       var weatherIcon = "http://openweathermap.org/img/w/" + iconID + ".png"; // weather icons are located on the openweather website, listed by icon ID inside response
       var weatherIconAlt = (response.list[position].weather[0].description) + " weather icon"; // weather icon alt tag response
-      let temp = `Tempature: ${parseFloat((response.list[position].main.temp - 273.15) * 1.80 + 32).toFixed(2)}(F)`; // temperature converted from Kelvin
+      let temp = `Temperature: ${parseFloat((response.list[position].main.temp - 273.15) * 1.80 + 32).toFixed(2)}(F)`; // temperature converted from Kelvin
       $(this).text(moment(day).format('MMMM DD, YYYY')); // Date display
       $(this).next().attr('src', weatherIcon); // weather icon display
       $(this).next().attr('alt', weatherIconAlt); //img alt definition
