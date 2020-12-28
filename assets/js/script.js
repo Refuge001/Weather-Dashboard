@@ -38,6 +38,14 @@ function searchFunction() {
     })
 
   });
+
+  function createRow() {
+    const row = $('<div>');
+    const cityName = $('<button>').text(citySearch);
+    row.append(cityName);
+    row.appendTo('.history');
+  }
+  createRow();
 }
 
 $('.btn').on('click', searchFunction);
