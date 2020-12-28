@@ -28,31 +28,51 @@
             <input type="search" id="search" />
             <button type="button" class="btn btn-primary fa fa-search"></button>
           </form>
+          <div class="container"></div>
         </div>
-        <div class="col">
-          <div class="city"></div>
+        <div class="col weather-display">
+          <div class="city"><h1>Weather Details</h1></div>
           <br />
-          <div class="wind"></div>
+          <div class="wind">Wind Speed:</div>
           <br />
-          <div class="humidity"></div>
+          <div class="humidity">Humidity:</div>
           <br />
-          <div class="temp"></div>
+          <div class="temp">Temperature:</div>
           <br />
-          <div class="uv"></div>
+          <div class="uv">UV Index:</div>
         </div>
       </div>
       <div class="row">
-        <div class="col">
-          <div class="day1">Day 1:</div>
-          <div class="day2">Day 2:</div>
-          <div class="day3">Day 3:</div>
-          <div class="day4">Day 4:</div>
-          <div class="day5">Day 5:</div>
+        <div class="col forecast">
+          <div class="fiveday" id="0">Day 1:</div>
+          <div class="tempForecast"></div>
+          <div class="humidityForecast"></div>
+        </div>
+        <div class="col forecast">
+          <div class="fiveday" id="8">Day 2:</div>
+          <div class="tempForecast"></div>
+          <div class="humidityForecast"></div>
+        </div>
+        <div class="col forecast">
+          <div class="fiveday" id="16">Day 3:</div>
+          <div class="tempForecast"></div>
+          <div class="humidityForecast"></div>
+        </div>
+        <div class="col forecast">
+          <div class="fiveday" id="24">Day 4:</div>
+          <div class="tempForecast"></div>
+          <div class="humidityForecast"></div>
+        </div>
+        <div class="col forecast">
+          <div class="fiveday" id="32">Day 5:</div>
+          <div class="tempForecast"></div>
+          <div class="humidityForecast"></div>
         </div>
       </div>
       <hr />
     </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
