@@ -13,7 +13,7 @@ function searchFunction() {
 
     console.log(response);
 
-    $('.city').html(`<h1>${response.name} Weather Details</h1>`);
+    $('.city').html(`<h2>${response.name} - ${moment().format('MMMM DD, YYYY')}</h2>`);
     $('.wind').text(`Wind Speed: ${response.wind.speed} MPH`);
     $('.humidity').text(`Humidity: ${response.main.humidity}%`);
     let temp = `Tempature: ${parseFloat((response.main.temp - 273.15) * 1.80 + 32).toFixed(2)}(F)`;
@@ -28,14 +28,18 @@ function searchFunction() {
     console.log(response);
 
     $(".fiveday").each(function () {
-      var position = $(this).attr('id');
-      var day = (response.list[position].dt_txt)
-      console.log(position);
-      let temp = `Tempature: ${parseFloat((response.list[position].main.temp - 273.15) * 1.80 + 32).toFixed(2)}(F)`;
-      $(this).text(moment(day).format('MMMM DD, YYYY'));
-      $(this).next().text(temp);
-      $(this).next().next().text(`Humidity: ${response.list[position].main.humidity}%`);
-    })
+      var position = $(this).attr('id'); // ID in increments of 8: 8 * 3 = 24 hours (3 hour intervals)
+      var day = (response.list[position].dt_txt) // Day inside response
+      var iconID = (response.list[position].weather[0].icon) // find icon ID for website URL lookup
+      var weatherIcon = "http://openweathermap.org/img/w/" + iconID + ".png"; // weather icons are located on the openweather website, listed by icon ID inside response
+      var weatherIconAlt = (response.list[position].weather[0].description) + " weather icon"; // weather icon alt tag response
+      let temp = `Tempature: ${parseFloat((response.list[position].main.temp - 273.15) * 1.80 + 32).toFixed(2)}(F)`; // temperature converted from Kelvin
+      $(this).text(moment(day).format('MMMM DD, YYYY')); // Date display
+      $(this).next().attr('src', weatherIcon); // weather icon display
+      $(this).next().attr('alt', weatherIconAlt); //img alt definition
+      $(this).next().next().text(temp); // Temperature display
+      $(this).next().next().next().text(`Humidity: ${response.list[position].main.humidity}%`); // Humidity
+    });
 
   });
 

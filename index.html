@@ -16,10 +16,12 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Weather Dashboard</title>
   </head>
+
   <body>
     <header class="text-center bg-dark text-white">
       <h1>Weather Dashboard</h1>
     </header>
+
     <section>
       <div class="row">
         <div class="col">
@@ -31,7 +33,8 @@
           <div class="container history"></div>
         </div>
         <div class="col weather-display">
-          <div class="city"><h1>Weather Details</h1></div>
+          <h1>Weather Details:</h1>
+          <div class="city"></div>
           <br />
           <div class="wind">Wind Speed:</div>
           <br />
@@ -42,35 +45,47 @@
           <div class="uv">UV Index:</div>
         </div>
       </div>
-      <div class="row">
-        <div class="col forecast">
-          <div class="fiveday" id="0">Day 1:</div>
-          <div class="tempForecast"></div>
-          <div class="humidityForecast"></div>
-        </div>
-        <div class="col forecast">
-          <div class="fiveday" id="8">Day 2:</div>
-          <div class="tempForecast"></div>
-          <div class="humidityForecast"></div>
-        </div>
-        <div class="col forecast">
-          <div class="fiveday" id="16">Day 3:</div>
-          <div class="tempForecast"></div>
-          <div class="humidityForecast"></div>
-        </div>
-        <div class="col forecast">
-          <div class="fiveday" id="24">Day 4:</div>
-          <div class="tempForecast"></div>
-          <div class="humidityForecast"></div>
-        </div>
-        <div class="col forecast">
-          <div class="fiveday" id="32">Day 5:</div>
-          <div class="tempForecast"></div>
-          <div class="humidityForecast"></div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Five Day Forecast:</h2>
+        <div class="row">
+          <div class="col forecast">
+            <div class="fiveday" id="0">Day 1:</div>
+            <img src="" alt="" />
+            <div class="tempForecast"></div>
+            <div class="humidityForecast"></div>
+          </div>
+          <div class="col forecast">
+            <div class="fiveday" id="8">Day 2:</div>
+            <img src="" alt="" />
+            <div class="tempForecast"></div>
+            <div class="humidityForecast"></div>
+          </div>
+          <div class="col forecast">
+            <div class="fiveday" id="16">Day 3:</div>
+            <img src="" alt="" />
+            <div class="tempForecast"></div>
+            <div class="humidityForecast"></div>
+          </div>
+          <div class="col forecast">
+            <div class="fiveday" id="24">Day 4:</div>
+            <img src="" alt="" />
+            <div class="tempForecast"></div>
+            <div class="humidityForecast"></div>
+          </div>
+          <div class="col forecast">
+            <div class="fiveday" id="32">Day 5:</div>
+            <img src="" alt="" />
+            <div class="tempForecast"></div>
+            <div class="humidityForecast"></div>
+          </div>
         </div>
       </div>
       <hr />
     </section>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
