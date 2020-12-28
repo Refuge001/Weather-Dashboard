@@ -22,11 +22,6 @@ function searchFunction() {
   });
 }
 
-function searchFunctionEnter() {
-  var citySearch = $(this).val();
-  console.log(citySearch);
-};
-
 $('.btn').on('click', searchFunction);
 $('#form-search').keypress(function (event) {
   if (event.keyCode === 13) {
