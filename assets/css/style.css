@@ -1,6 +1,24 @@
+header {
+  font-size: 34px;
+}
+
+.search-div {
+  margin-left: 5px;
+  background-color: rgb(41, 212, 190);
+}
+
 .weather-display {
-  border: 0.5px solid black;
+  border-bottom: 0.5px solid black;
+  border-left: 0.5px solid black;
+  border-right: 0.5px solid black;
   padding-bottom: 10px;
+  margin-right: 25px;
+}
+
+.savedHistory {
+  background-color: blue;
+  color: white;
+  margin-bottom: 3px;
 }
 
 .forecast {

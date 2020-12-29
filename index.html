@@ -18,25 +18,25 @@
   </head>
 
   <body>
-    <header class="text-center bg-dark text-white">
-      <h1>Weather Dashboard</h1>
-    </header>
+    <header class="text-center bg-dark text-white">Weather Dashboard</header>
 
     <section>
       <div class="row">
-        <div class="col">
+        <div class="col search-div">
           Search for a City:
           <form id="form-search">
             <input type="search" id="search" />
             <button
               type="button"
-              class="btn btn-primary buttonInput fa fa-search"
+              class="btn btn-primary buttonInput fa fa-search mb-1"
             ></button>
           </form>
-          <div class="container history"></div>
+          <div class="container history col-lg-4 mt-1 float-left">
+            Saved Searches:
+          </div>
         </div>
         <div class="col weather-display">
-          <h2>Weather Details:</h2>
+          <h2>Current Weather Details:</h2>
           <div class="city"></div>
           <br />
           <div class="wind">Wind Speed:</div>
@@ -107,6 +107,7 @@
       <hr />
     </section>
 
+    <script src="./assets/js/three.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>

@@ -58,7 +58,6 @@ function defaultFunction(citySearch) {
     url: queryForecast,
     method: "GET"
   }).then(function (response) {
-    console.log(response);
 
     $(".fiveday").each(function () {
       var position = $(this).attr('id'); // ID in increments of 8: 8 * 3 = 24 hours (3 hour intervals)
@@ -126,7 +125,6 @@ function searchFunction() {
     url: queryForecast,
     method: "GET"
   }).then(function (response) {
-    console.log(response);
 
     $(".fiveday").each(function () {
       var position = $(this).attr('id'); // ID in increments of 8: 8 * 3 = 24 hours (3 hour intervals)
@@ -220,6 +218,32 @@ function historyFunction() {
     });
   });
 }
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x29D4BE);
+const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(500, 249);
+$('.search-div').append(renderer.domElement);
+
+const geometry = new THREE.BoxGeometry();
+const material = new THREE.MeshBasicMaterial({ color: 0x8000FF });
+const cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
+
+camera.position.z = 5;
+
+const animate = function () {
+  requestAnimationFrame(animate);
+
+  cube.rotation.x += 0.01;
+  cube.rotation.y += 0.01;
+
+  renderer.render(scene, camera);
+};
+
+animate();
 
 $('.buttonInput').on('click', searchFunction);
 $('#form-search').keypress(function (event) {
