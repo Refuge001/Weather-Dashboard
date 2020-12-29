@@ -9,7 +9,7 @@ var APIkey = "f094b3d4247e89d90ebcf38a7e5d3caa";
 //   }
 // });
 
-function searchFunction(citySearch) {
+function searchFunction() {
   var citySearch = $('.buttonInput').prev().val();
   var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearch + "&appid=" + APIkey;
   var queryForecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + citySearch + "&cnt=40&appid=" + APIkey;
@@ -19,14 +19,27 @@ function searchFunction(citySearch) {
     method: "GET"
   }).then(function (response) {
 
-    console.log(response);
-
     $('.city').html(`<h2>${response.name} - ${moment().format('MMMM DD, YYYY')}</h2>`);
     $('.wind').text(`Wind Speed: ${response.wind.speed} MPH`);
     $('.humidity').text(`Humidity: ${response.main.humidity}%`);
     let temp = `Tempature: ${parseFloat((response.main.temp - 273.15) * 1.80 + 32).toFixed(2)}°F`;
     $('.temp').html(temp);
+    lonQuery = (response.coord.lon);
+    latQuery = (response.coord.lat);
+    uvFunction(lonQuery, latQuery);
   });
+
+  function uvFunction(lonQuery, latQuery) {
+
+    var queryUV = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latQuery + "&lon=" + lonQuery + "&exclude=minutely,hourly,alerts,daily&appid=" + APIkey;
+    console.log(queryUV);
+    $.ajax({
+      url: queryUV,
+      method: "GET"
+    }).then(function (response) {
+      $('.uv').text(`UV Index: ${response.current.uvi}`)
+    });
+  }
 
   $.ajax({
     url: queryForecast,
@@ -56,6 +69,7 @@ function searchFunction(citySearch) {
     row.append(cityName);
     row.appendTo('.history');
   }
+
   createRow();
   localStorage.setItem('lastCity', citySearch);
   $('.savedHistory').on('click', historyFunction);
