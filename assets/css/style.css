@@ -1,15 +1,19 @@
 .weather-display {
   border: 0.5px solid black;
-}
-.weather-display {
   padding-bottom: 10px;
 }
+
 .forecast {
   flex-wrap: wrap;
   background-color: blue;
   color: white;
-  border: 1px solid lime;
   margin-right: 20px;
   margin-left: 20px;
-  border-radius: 25px;
+  border-radius: 10px;
+}
+
+.uv {
+  width: 25px;
+  color: white;
+  text-align: center;
 }

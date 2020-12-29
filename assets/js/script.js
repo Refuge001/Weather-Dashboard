@@ -38,7 +38,19 @@ function defaultFunction(citySearch) {
       url: queryUV,
       method: "GET"
     }).then(function (response) {
-      $('.uv').text(`UV Index: ${response.current.uvi}`)
+      var uvColor = response.current.uvi;
+      $('.uv').text(uvColor); // Color UV
+      if (uvColor <= 3) {
+        $('.uv').css('background-color', 'green');
+      } else if (uvColor > 3 && uvColor <= 6) {
+        $('.uv').css({ 'background-color': 'yellow', 'color': 'black' });
+      } else if (uvColor > 6 && uvColor <= 8) {
+        $('.uv').css({ 'backgrond-color': 'orange', 'color': 'black' });
+      } else if (uvColor > 8 && uvColor <= 11) {
+        $('.uv').css('background-color', 'red');
+      } else if (uvColor > 11) {
+        $('.uv').css('background-color', 'violet');
+      }
     });
   }
 
@@ -94,7 +106,19 @@ function searchFunction() {
       url: queryUV,
       method: "GET"
     }).then(function (response) {
-      $('.uv').text(`UV Index: ${response.current.uvi}`)
+      var uvColor = response.current.uvi;
+      $('.uv').text(uvColor); // Color UV
+      if (uvColor <= 3) {
+        $('.uv').css('background-color', 'green');
+      } else if (uvColor > 3 && uvColor <= 6) {
+        $('.uv').css({ 'background-color': 'yellow', 'color': 'black' });
+      } else if (uvColor > 6 && uvColor <= 8) {
+        $('.uv').css({ 'backgrond-color': 'orange', 'color': 'black' });
+      } else if (uvColor > 8 && uvColor <= 11) {
+        $('.uv').css('background-color', 'red');
+      } else if (uvColor > 11) {
+        $('.uv').css('background-color', 'violet');
+      }
     });
   }
 
@@ -148,9 +172,34 @@ function historyFunction() {
     $('.humidity').text(`Humidity: ${response.main.humidity}%`);
     let temp = `Tempature: ${parseFloat((response.main.temp - 273.15) * 1.80 + 32).toFixed(2)}°F`;
     $('.temp').html(temp);
+    lonQuery = (response.coord.lon);
+    latQuery = (response.coord.lat);
+    uvFunction(lonQuery, latQuery);
     localStorage.setItem('lastCity', `${response.name}`);
   });
 
+  function uvFunction(lonQuery, latQuery) {
+
+    var queryUV = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latQuery + "&lon=" + lonQuery + "&exclude=minutely,hourly,alerts,daily&appid=" + APIkey;
+    $.ajax({
+      url: queryUV,
+      method: "GET"
+    }).then(function (response) {
+      var uvColor = response.current.uvi;
+      $('.uv').text(uvColor); // Color UV
+      if (uvColor <= 3) {
+        $('.uv').css('background-color', 'green');
+      } else if (uvColor > 3 && uvColor <= 6) {
+        $('.uv').css({ 'background-color': 'yellow', 'color': 'black' });
+      } else if (uvColor > 6 && uvColor <= 8) {
+        $('.uv').css({ 'backgrond-color': 'orange', 'color': 'black' });
+      } else if (uvColor > 8 && uvColor <= 11) {
+        $('.uv').css('background-color', 'red');
+      } else if (uvColor > 11) {
+        $('.uv').css('background-color', 'violet');
+      }
+    });
+  }
   $.ajax({
     url: queryForecast,
     method: "GET"
