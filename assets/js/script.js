@@ -32,7 +32,6 @@ function searchFunction() {
   function uvFunction(lonQuery, latQuery) {
 
     var queryUV = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latQuery + "&lon=" + lonQuery + "&exclude=minutely,hourly,alerts,daily&appid=" + APIkey;
-    console.log(queryUV);
     $.ajax({
       url: queryUV,
       method: "GET"
