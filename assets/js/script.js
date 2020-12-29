@@ -224,14 +224,13 @@ scene.background = new THREE.Color(0x29D4BE);
 const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 const renderer = new THREE.WebGLRenderer();
-renderer.setSize(500, 249);
+renderer.setSize(300, 200);
 $('.search-div').append(renderer.domElement);
 
-const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshBasicMaterial({ color: 0x8000FF });
+const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5, 3, 3, 3);
+const material = new THREE.MeshBasicMaterial({ color: 0x8000FF, wireframe: true });
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
-
 camera.position.z = 5;
 
 const animate = function () {
