@@ -10,12 +10,10 @@ $(document).ready(function () {
 });
 
 
-//Primary search function, triggers on enter/click
+//Primary search function, triggers on enter/click/page reload, queries city/wind/temp/humidity/lat/long
 function searchFunction(citySearch, historySearch) {
-  console.log(citySearch);
   var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearch + "&appid=" + APIkey;
   var queryForecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + citySearch + "&cnt=40&appid=" + APIkey;
-
   $.ajax({
     url: queryURL,
     method: "GET"
@@ -31,16 +29,16 @@ function searchFunction(citySearch, historySearch) {
     uvFunction(lonQuery, latQuery);
     localStorage.setItem('lastCity', `${response.name}`);
   });
-
+  //gets UV values
   function uvFunction(lonQuery, latQuery) {
-
     var queryUV = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latQuery + "&lon=" + lonQuery + "&exclude=minutely,hourly,alerts,daily&appid=" + APIkey;
     $.ajax({
       url: queryUV,
       method: "GET"
     }).then(function (response) {
       var uvColor = response.current.uvi;
-      $('.uv').text(uvColor); // Color UV
+      $('.uv').text(uvColor); // UV Value
+      // UV color coding
       if (uvColor <= 3) {
         $('.uv').css('background-color', 'green');
       } else if (uvColor > 3 && uvColor <= 6) {
@@ -59,7 +57,7 @@ function searchFunction(citySearch, historySearch) {
     url: queryForecast,
     method: "GET"
   }).then(function (response) {
-
+    //Five Day Forecast forEach loop
     $(".fiveday").each(function () {
       var position = $(this).attr('id'); // ID in increments of 8: 8 * 3 = 24 hours (3 hour intervals)
       var day = (response.list[position].dt_txt) // Day inside response
@@ -73,14 +71,15 @@ function searchFunction(citySearch, historySearch) {
       $(this).next().next().text(temp); // Temperature display
       $(this).next().next().next().text(`Humidity: ${response.list[position].main.humidity}%`); // Humidity
     });
-    console.log(historySearch);
   });
-  if (historySearch === false) {
-    alert('not creating a row');
-  } else {
+  //Check whether to save history or not
+  if (historySearch === true) {
     createRow();
+    $('.savedHistory').on('click', (function () {
+      searchFunction($(this).text(), false);
+    }));
   }
-
+  //create Saved Searches buttons
   function createRow() {
     const row = $('<div>');
     const cityName = $('<button>').text(citySearch).attr('class', 'savedHistory');
@@ -89,6 +88,7 @@ function searchFunction(citySearch, historySearch) {
   }
 }
 
+//three.js polygon - just messing with it
 // const scene = new THREE.Scene();
 // scene.background = new THREE.Color(0x29D4BE);
 // const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -113,10 +113,6 @@ function searchFunction(citySearch, historySearch) {
 // };
 
 // animate();
-
-$('.savedHistory').on('click', (function () {
-  searchFunction($('.savedHistory').text(), false);
-}));
 
 $('.buttonInput').on('click', (function () {
   searchFunction($('#search').val(), true);
