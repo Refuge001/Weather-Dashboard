@@ -1,6 +1,6 @@
 var APIkey = "f094b3d4247e89d90ebcf38a7e5d3caa";
 
-//Search if localStorage has a saved search in it, pass citySearch to defaultFunction
+//Search if localStorage has a saved search in it, pass citySearch to searchFunction
 $(document).ready(function () {
   if (localStorage.getItem("lastCity") === null) {
   } else {
@@ -10,7 +10,7 @@ $(document).ready(function () {
 });
 
 
-//Primary search function, triggers on enter/click/page reload, queries city/wind/temp/humidity/lat/long
+//Primary search function, triggers on enter/click/page reload, queries city/wind/temp/humidity/lat/long/uv/5-day forecast
 function searchFunction(citySearch, historySearch) {
   var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearch + "&appid=" + APIkey;
   var queryForecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + citySearch + "&cnt=40&appid=" + APIkey;
@@ -24,11 +24,12 @@ function searchFunction(citySearch, historySearch) {
     $('.humidity').text(`Humidity: ${response.main.humidity}%`);
     let temp = `Tempature: ${parseFloat((response.main.temp - 273.15) * 1.80 + 32).toFixed(2)}°F`;
     $('.temp').html(temp);
-    lonQuery = (response.coord.lon);
-    latQuery = (response.coord.lat);
+    lonQuery = response.coord.lon;
+    latQuery = response.coord.lat;
     uvFunction(lonQuery, latQuery);
     localStorage.setItem('lastCity', `${response.name}`);
   });
+
   //gets UV values
   function uvFunction(lonQuery, latQuery) {
     var queryUV = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latQuery + "&lon=" + lonQuery + "&exclude=minutely,hourly,alerts,daily&appid=" + APIkey;
@@ -60,8 +61,8 @@ function searchFunction(citySearch, historySearch) {
     //Five Day Forecast forEach loop
     $(".fiveday").each(function () {
       var position = $(this).attr('id'); // ID in increments of 8: 8 * 3 = 24 hours (3 hour intervals)
-      var day = (response.list[position].dt_txt) // Day inside response
-      var iconID = (response.list[position].weather[0].icon) // find icon ID for website URL lookup
+      var day = (response.list[position].dt_txt); // Day inside response
+      var iconID = (response.list[position].weather[0].icon); // find icon ID for website URL lookup
       var weatherIcon = "http://openweathermap.org/img/w/" + iconID + ".png"; // weather icons are located on the openweather website, listed by icon ID inside response
       var weatherIconAlt = (response.list[position].weather[0].description) + " weather icon"; // weather icon alt tag response
       let temp = `Temperature: ${parseFloat((response.list[position].main.temp - 273.15) * 1.80 + 32).toFixed(2)}°F`; // temperature converted from Kelvin
@@ -72,13 +73,15 @@ function searchFunction(citySearch, historySearch) {
       $(this).next().next().next().text(`Humidity: ${response.list[position].main.humidity}%`); // Humidity
     });
   });
-  //Check whether to save history or not
+
+  //Check whether to save history or not/save search history if true
   if (historySearch === true) {
     createRow();
     $('.savedHistory').on('click', (function () {
       searchFunction($(this).text(), false);
     }));
   }
+
   //create Saved Searches buttons
   function createRow() {
     const row = $('<div>');
@@ -87,32 +90,6 @@ function searchFunction(citySearch, historySearch) {
     row.appendTo('.history');
   }
 }
-
-//three.js polygon - just messing with it
-// const scene = new THREE.Scene();
-// scene.background = new THREE.Color(0x29D4BE);
-// const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-// const renderer = new THREE.WebGLRenderer();
-// renderer.setSize(300, 200);
-// $('.search-div').append(renderer.domElement);
-
-// const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5, 3, 3, 3);
-// const material = new THREE.MeshBasicMaterial({ color: 0x8000FF, wireframe: true });
-// const cube = new THREE.Mesh(geometry, material);
-// scene.add(cube);
-// camera.position.z = 5;
-
-// const animate = function () {
-//   requestAnimationFrame(animate);
-
-//   cube.rotation.x += 0.01;
-//   cube.rotation.y += 0.01;
-
-//   renderer.render(scene, camera);
-// };
-
-// animate();
 
 $('.buttonInput').on('click', (function () {
   searchFunction($('#search').val(), true);
