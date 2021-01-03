@@ -106,15 +106,15 @@ function weatherCage(iconID) {
   renderer.setSize(window.innerWidth, window.innerHeight);
   $('.appendthreejs').append(renderer.domElement);
   //textures
-  // const manager = new THREE.LoadingManager(); // maybe reason why second texture doesn't load - might have to use loading manager
+  // const manager = new THREE.LoadingManager(); // maybe reason why second texture doesn't load from local - might have to use loading manager/local server??
   const texture = new THREE.TextureLoader().load("http://openweathermap.org/img/w/" + iconID + ".png");
-  // const texture2 = new THREE.TextureLoader().load("./img/sky.jpg");
+  const texture2 = new THREE.TextureLoader().load("https://images.pexels.com/photos/53594/blue-clouds-day-fluffy-53594.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
 
   const material = new THREE.MeshBasicMaterial({ map: texture });
   const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5, 3, 3, 3);
   const cube = new THREE.Mesh(geometry, material);
 
-  const cylinderMaterial = new THREE.MeshBasicMaterial({ map: texture, side: THREE.BackSide });
+  const cylinderMaterial = new THREE.MeshBasicMaterial({ map: texture2, side: THREE.BackSide });
   const cylinderGeometry = new THREE.CylinderGeometry(5, 5, 20, 32);
   const cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
 
