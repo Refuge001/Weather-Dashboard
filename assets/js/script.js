@@ -160,6 +160,7 @@ function weatherCage(iconID) {
 
 $('.buttonInput').on('click', (function () {
   searchFunction($('#search').val(), true);
+  $('#search').val('');
 }));
 
 $('#form-search').keypress(function (event) {
