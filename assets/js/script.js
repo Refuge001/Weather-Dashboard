@@ -91,6 +91,38 @@ function searchFunction(citySearch, historySearch) {
   }
 }
 
+//three.js polygon - just messing with it
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x29D4BE);
+const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+$('.appendthreejs').append(renderer.domElement);
+
+const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5, 3, 3, 3);
+const material = new THREE.MeshBasicMaterial({ color: 0x8000FF, wireframe: true });
+const cube = new THREE.Mesh(geometry, material);
+const cylinderGeometry = new THREE.CylinderGeometry(5, 5, 20, 32);
+const cylinder = new THREE.Mesh(cylinderGeometry, material);
+scene.add(cylinder);
+scene.add(cube);
+camera.position.z = 5;
+
+const animate = function () {
+  requestAnimationFrame(animate);
+
+  cube.rotation.x += 0.01;
+  cube.rotation.y += 0.01;
+
+  cylinder.rotation.x += 0.01;
+  cylinder.rotation.y += 0.01;
+
+  renderer.render(scene, camera);
+};
+
+animate();
+
 $('.buttonInput').on('click', (function () {
   searchFunction($('#search').val(), true);
 }));
