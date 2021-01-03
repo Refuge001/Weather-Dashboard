@@ -1,10 +1,9 @@
 # Weather Dashboard
 ## Weather Dashboard Capabilities
 
-- Saves previous weather searches!
+- Saves five previous weather searches!
 - 5 Day Forecast!
 - Current weather conditions!
-
 ---
 
 ## How to use:

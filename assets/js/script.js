@@ -9,7 +9,6 @@ $(document).ready(function () {
   }
 });
 
-
 //Primary search function, triggers on enter/click/page reload, queries city/wind/temp/humidity/lat/long/uv/5-day forecast
 function searchFunction(citySearch, historySearch) {
   var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearch + "&appid=" + APIkey;
@@ -49,7 +48,7 @@ function searchFunction(citySearch, historySearch) {
       } else if (uvColor > 3 && uvColor <= 6) {
         $('.uv').css({ 'background-color': 'yellow', 'color': 'black' });
       } else if (uvColor > 6 && uvColor <= 8) {
-        $('.uv').css({ 'backgrond-color': 'orange', 'color': 'black' });
+        $('.uv').css({ 'background-color': 'orange', 'color': 'black' });
       } else if (uvColor > 8 && uvColor <= 11) {
         $('.uv').css('background-color', 'red');
       } else if (uvColor > 11) {
@@ -78,11 +77,11 @@ function searchFunction(citySearch, historySearch) {
     });
   });
 
-  //Check whether to save history or not/save search history if true
+  //Check whether to save history or not/save search history if true, remove searches greater than 5"
   if (historySearch === true) {
     var searchArray = [];
     var saveHistory = 1;
-    var historyDom = $('.history')[0];
+    var historyDom = $('.history')[0]; // couldn't get jQuery to remove children properly so had to create dom element variable
     $(".savedHistory").each(function () {
       var citySave = $(this).html();
       searchArray.push(citySave);
@@ -113,6 +112,7 @@ function searchFunction(citySearch, historySearch) {
     row.appendTo('.history');
   }
 }
+
 //"WARNING: Too many active WebGL contexts. Oldest context will be lost." - from searching too many cities
 // WebGL. Contexts are deleted by garbage collection (removing canvas seems to just remove rendering superficially - i think still stored in memory, more research here)
 
