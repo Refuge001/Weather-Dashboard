@@ -9,7 +9,7 @@
 
 ## How to use:
 
-1. Enter your city and press enter or click search icon.
+1. Enter your city and press enter or click on the search icon or your saved history! .
 2. Gaze in wide wonder at the joy that you have found.
 
 ---

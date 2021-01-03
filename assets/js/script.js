@@ -18,8 +18,11 @@ function searchFunction(citySearch, historySearch) {
     url: queryURL,
     method: "GET"
   }).then(function (response) {
-
-    $('.city').html(`<h2>${response.name} - ${moment().format('MMMM DD, YYYY')}</h2>`);
+    var iconID = (response.weather[0].icon); // find icon ID for website URL lookup
+    var weatherIcon = "http://openweathermap.org/img/w/" + iconID + ".png"; // weather icons are located on the openweather website, listed by icon ID inside response
+    var weatherIconAlt = (response.weather[0].description) + " weather icon"; // weather icon alt tag response
+    $('.city').html(`<h2>${response.name} - ${moment().format('l')}<img src='${weatherIcon}' alt='${weatherIconAlt}' /></h2>`)
+    // $('#cityIcon').attr('src', weatherIcon).attr('alt', weatherIconAlt); ---- just added to the html in line above, left here for the sake of example.
     $('.wind').text(`Wind Speed: ${response.wind.speed} MPH`);
     $('.humidity').text(`Humidity: ${response.main.humidity}%`);
     let temp = `Tempature: ${parseFloat((response.main.temp - 273.15) * 1.80 + 32).toFixed(2)}°F`;
@@ -99,6 +102,9 @@ const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerH
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 $('.appendthreejs').append(renderer.domElement);
+
+//textures
+// const texture = new THREE.TextureLoader().load("http://openweathermap.org/img/w/" + iconID + ".png");
 
 const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5, 3, 3, 3);
 const material = new THREE.MeshBasicMaterial({ color: 0x8000FF, wireframe: true });
