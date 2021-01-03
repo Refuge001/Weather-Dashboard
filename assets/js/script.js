@@ -80,7 +80,7 @@ function searchFunction(citySearch, historySearch) {
   });
 
   //Check whether to save history or not/save search history if true
-  if (historySearch === true) {
+  if (historySearch === true && $(".savedHistory").text() != citySearch) {
     createRow();
     $('.savedHistory').on('click', (function () {
       searchFunction($(this).text(), false);
@@ -125,11 +125,11 @@ function weatherCage(iconID) {
   const animate = function () {
     requestAnimationFrame(animate);
 
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
+    cube.rotation.x += 0.005;
+    cube.rotation.y += 0.005;
 
-    cylinder.rotation.x += 0.01;
-    cylinder.rotation.y += 0.01;
+    cylinder.rotation.x += 0.005;
+    cylinder.rotation.y += 0.005;
 
     renderer.render(scene, camera);
   };
