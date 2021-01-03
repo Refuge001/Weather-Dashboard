@@ -1,5 +1,5 @@
-# Weather-Dashboard
-## Work Day Scheduler Capabilities
+# Weather Dashboard
+## Weather Dashboard Capabilities
 
 - Saves previous weather searches!
 - 5 Day Forecast!
@@ -13,6 +13,7 @@
 2. Gaze in wide wonder at the joy that you have found.
 
 ---
+## ![My Weather Dashboard](/assets/img/weather.PNG)
 
 # https://refuge001.github.io/Weather-Dashboard/
 
