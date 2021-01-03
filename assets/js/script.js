@@ -1,5 +1,4 @@
 var APIkey = "f094b3d4247e89d90ebcf38a7e5d3caa";
-var iconID = ""
 
 //Search if localStorage has a saved search in it, pass citySearch to searchFunction
 $(document).ready(function () {
@@ -22,17 +21,17 @@ function searchFunction(citySearch, historySearch) {
     var iconID = (response.weather[0].icon); // find icon ID for website URL lookup
     var weatherIcon = "http://openweathermap.org/img/w/" + iconID + ".png"; // weather icons are located on the openweather website, listed by icon ID inside response
     var weatherIconAlt = (response.weather[0].description) + " weather icon"; // weather icon alt tag response
-    $('.city').html(`<h2>${response.name} - ${moment().format('l')}<img src='${weatherIcon}' alt='${weatherIconAlt}' /></h2>`)
+    $('.city').html(`<h2>${response.name} - ${moment().format('l')}<img src='${weatherIcon}' alt='${weatherIconAlt}' /></h2>`); //City name/weather icon response display
     // $('#cityIcon').attr('src', weatherIcon).attr('alt', weatherIconAlt); ---- just added to the html in line above, left here for the sake of example.
-    $('.wind').text(`Wind Speed: ${response.wind.speed} MPH`);
-    $('.humidity').text(`Humidity: ${response.main.humidity}%`);
-    let temp = `Tempature: ${parseFloat((response.main.temp - 273.15) * 1.80 + 32).toFixed(2)}°F`;
-    $('.temp').html(temp);
+    $('.wind').text(`Wind Speed: ${response.wind.speed} MPH`); // Wind response display
+    $('.humidity').text(`Humidity: ${response.main.humidity}%`); // Humidity response display
+    let temp = `Tempature: ${parseFloat((response.main.temp - 273.15) * 1.80 + 32).toFixed(2)}°F`; // kelvin to Fahrenheit conversion
+    $('.temp').html(temp); // Temp response display
     lonQuery = response.coord.lon;
     latQuery = response.coord.lat;
     uvFunction(lonQuery, latQuery);
-    localStorage.setItem('lastCity', `${response.name}`);
-    weatherCage(iconID);
+    localStorage.setItem('lastCity', `${response.name}`); // where localStorage key/value saved
+    weatherCage(iconID); // Where 3d image function is run
   });
 
   //gets UV values
@@ -80,8 +79,26 @@ function searchFunction(citySearch, historySearch) {
   });
 
   //Check whether to save history or not/save search history if true
-  if (historySearch === true && $(".savedHistory").text() != citySearch) {
-    createRow();
+  if (historySearch === true) {
+    var searchArray = [];
+    var saveHistory = 1;
+
+    $(".savedHistory").each(function () {
+      var citySave = $(this).html();
+      searchArray.push(citySave);
+      console.log(searchArray);
+    });
+    for (let i = 0; i < searchArray.length; i++) {
+      if (searchArray[i] == citySearch) {
+        saveHistory = 0;
+        console.log(saveHistory)
+        return saveHistory;
+      }
+    }
+    console.log(saveHistory)
+    if (saveHistory === 1) {
+      createRow();
+    }
     $('.savedHistory').on('click', (function () {
       searchFunction($(this).text(), false);
     }));
@@ -95,7 +112,10 @@ function searchFunction(citySearch, historySearch) {
     row.appendTo('.history');
   }
 }
+//"WARNING: Too many active WebGL contexts. Oldest context will be lost." - from searching too many cities
+// WebGL. Contexts are deleted by garbage collection (removing canvas seems to just remove rendering superficially - i think still stored in memory, more research here)
 
+//Animated cube and cylinder - 
 function weatherCage(iconID) {
   $('canvas').remove();
   const scene = new THREE.Scene();
