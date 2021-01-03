@@ -102,18 +102,19 @@ function weatherCage(iconID) {
   scene.background = new THREE.Color(0x29D4BE);
   const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-  const renderer = new THREE.WebGLRenderer();
+  const renderer = new THREE.WebGLRenderer({ alpha: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   $('.appendthreejs').append(renderer.domElement);
   //textures
+  // const manager = new THREE.LoadingManager(); // maybe reason why second texture doesn't load - might have to use loading manager
   const texture = new THREE.TextureLoader().load("http://openweathermap.org/img/w/" + iconID + ".png");
-  // const texture2 = new THREE.TextureLoader().load("");
+  // const texture2 = new THREE.TextureLoader().load("./img/sky.jpg");
 
   const material = new THREE.MeshBasicMaterial({ map: texture });
   const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5, 3, 3, 3);
   const cube = new THREE.Mesh(geometry, material);
 
-  const cylinderMaterial = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide });
+  const cylinderMaterial = new THREE.MeshBasicMaterial({ map: texture, side: THREE.BackSide });
   const cylinderGeometry = new THREE.CylinderGeometry(5, 5, 20, 32);
   const cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
 
