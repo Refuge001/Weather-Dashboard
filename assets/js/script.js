@@ -97,8 +97,7 @@ function searchFunction(citySearch, historySearch) {
 }
 
 function weatherCage(iconID) {
-  //three.js polygon - just messing with it
-  // $('.appendthreejs:first-child').remove(); trying to clear the Three.Scene() so we don't get a ton of these for every search
+  $('canvas').remove();
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x29D4BE);
   const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -108,7 +107,7 @@ function weatherCage(iconID) {
   $('.appendthreejs').append(renderer.domElement);
   //textures
   const texture = new THREE.TextureLoader().load("http://openweathermap.org/img/w/" + iconID + ".png");
-  // const texture2 = new THREE.TextureLoader().load("cylinder texture gotta find one that works");
+  // const texture2 = new THREE.TextureLoader().load("");
 
   const material = new THREE.MeshBasicMaterial({ map: texture });
   const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5, 3, 3, 3);
