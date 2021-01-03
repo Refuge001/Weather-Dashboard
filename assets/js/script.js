@@ -82,23 +82,24 @@ function searchFunction(citySearch, historySearch) {
   if (historySearch === true) {
     var searchArray = [];
     var saveHistory = 1;
-
+    var historyDom = $('.history')[0];
     $(".savedHistory").each(function () {
       var citySave = $(this).html();
       searchArray.push(citySave);
-      console.log(searchArray);
     });
     for (let i = 0; i < searchArray.length; i++) {
       if (searchArray[i] == citySearch) {
         saveHistory = 0;
-        console.log(saveHistory)
         return saveHistory;
       }
     }
-    console.log(saveHistory)
-    if (saveHistory === 1) {
+    if (saveHistory === 1 && searchArray.length <= 4) {
+      createRow();
+    } else if (saveHistory === 1 && searchArray.length >= 5) {
+      historyDom.removeChild(historyDom.childNodes[1]);
       createRow();
     }
+
     $('.savedHistory').on('click', (function () {
       searchFunction($(this).text(), false);
     }));
