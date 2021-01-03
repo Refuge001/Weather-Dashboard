@@ -32,43 +32,7 @@ function searchFunction(citySearch, historySearch) {
     latQuery = response.coord.lat;
     uvFunction(lonQuery, latQuery);
     localStorage.setItem('lastCity', `${response.name}`);
-    function weatherCage() {
-      //three.js polygon - just messing with it
-      const scene = new THREE.Scene();
-      scene.background = new THREE.Color(0x29D4BE);
-      const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-      const renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      $('.appendthreejs').append(renderer.domElement);
-      //textures
-      const texture = new THREE.TextureLoader().load("http://openweathermap.org/img/w/" + iconID + ".png");
-      const material = new THREE.MeshBasicMaterial({ map: texture });
-
-      const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5, 3, 3, 3);
-      const cylinderMaterial = new THREE.MeshBasicMaterial({ color: 0x8000FF, wireframe: true });
-      const cube = new THREE.Mesh(geometry, material);
-      const cylinderGeometry = new THREE.CylinderGeometry(5, 5, 20, 32);
-      const cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
-      scene.add(cylinder);
-      scene.add(cube);
-      camera.position.z = 5;
-
-      const animate = function () {
-        requestAnimationFrame(animate);
-
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
-
-        cylinder.rotation.x += 0.01;
-        cylinder.rotation.y += 0.01;
-
-        renderer.render(scene, camera);
-      };
-
-      animate();
-    }
-    weatherCage();
+    weatherCage(iconID);
   });
 
   //gets UV values
@@ -130,6 +94,47 @@ function searchFunction(citySearch, historySearch) {
     row.append(cityName);
     row.appendTo('.history');
   }
+}
+
+function weatherCage(iconID) {
+  //three.js polygon - just messing with it
+  // $('.appendthreejs:first-child').remove(); trying to clear the Three.Scene() so we don't get a ton of these for every search
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x29D4BE);
+  const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+  const renderer = new THREE.WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  $('.appendthreejs').append(renderer.domElement);
+  //textures
+  const texture = new THREE.TextureLoader().load("http://openweathermap.org/img/w/" + iconID + ".png");
+  // const texture2 = new THREE.TextureLoader().load("cylinder texture gotta find one that works");
+
+  const material = new THREE.MeshBasicMaterial({ map: texture });
+  const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5, 3, 3, 3);
+  const cube = new THREE.Mesh(geometry, material);
+
+  const cylinderMaterial = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide });
+  const cylinderGeometry = new THREE.CylinderGeometry(5, 5, 20, 32);
+  const cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
+
+  scene.add(cylinder);
+  scene.add(cube);
+  camera.position.z = 5;
+
+  const animate = function () {
+    requestAnimationFrame(animate);
+
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+
+    cylinder.rotation.x += 0.01;
+    cylinder.rotation.y += 0.01;
+
+    renderer.render(scene, camera);
+  };
+
+  animate();
 }
 
 $('.buttonInput').on('click', (function () {
