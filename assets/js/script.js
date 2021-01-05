@@ -81,13 +81,12 @@ function searchFunction(citySearch, historySearch) {
   if (historySearch === true) {
     var searchArray = [];
     var saveHistory = 1;
-    var historyDom = $('.history')[0]; // couldn't get jQuery to remove children properly so had to create dom element variable
     $(".savedHistory").each(function () {
       var citySave = $(this).html();
       searchArray.push(citySave);
     });
     for (let i = 0; i < searchArray.length; i++) {
-      if (searchArray[i] == citySearch) {
+      if (searchArray[i] === citySearch) {
         saveHistory = 0;
         return saveHistory;
       }
@@ -95,13 +94,9 @@ function searchFunction(citySearch, historySearch) {
     if (saveHistory === 1 && searchArray.length <= 4) {
       createRow();
     } else if (saveHistory === 1 && searchArray.length >= 5) {
-      historyDom.removeChild(historyDom.childNodes[1]);
+      $('.history div').first().remove();
       createRow();
     }
-
-    $('.savedHistory').on('click', (function () {
-      searchFunction($(this).text(), false);
-    }));
   }
 
   //create Saved Searches buttons
@@ -169,3 +164,7 @@ $('#form-search').keypress(function (event) {
     $('.buttonInput').click();
   }
 });
+
+$(document).on('click', '.savedHistory', (function () {
+  searchFunction($(this).text(), false);
+}));
