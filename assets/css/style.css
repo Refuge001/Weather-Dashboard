@@ -17,7 +17,14 @@ header {
 .savedHistory {
   background-color: blue;
   color: white;
+  font-size: 20px;
   margin-bottom: 3px;
+}
+.savedHistory:hover {
+  background-color: orange;
+}
+.savedHistory:focus {
+  background-color: red;
 }
 
 .forecast {

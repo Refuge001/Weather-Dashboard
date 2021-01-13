@@ -101,8 +101,8 @@ function searchFunction(citySearch, historySearch) {
 
   //create Saved Searches buttons
   function createRow() {
-    const row = $('<div>');
-    const cityName = $('<button>').text(citySearch).attr('class', 'savedHistory');
+    const row = $('<div class="list-group">');
+    const cityName = $('<button class="savedHistory">').text(citySearch);
     row.append(cityName);
     row.appendTo('.history');
   }
