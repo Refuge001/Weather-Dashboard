@@ -16,6 +16,10 @@ div.container.history p {
   margin-bottom: 5px;
 }
 
+.bground {
+  background-color: cadetblue;
+}
+
 .weather-display {
   border-bottom: 0.5px solid black;
   border-left: 0.5px solid black;
@@ -50,6 +54,9 @@ div.container.history p {
   width: 35px;
   color: white;
   text-align: center;
+}
+canvas {
+  display: block;
 }
 
 .appendthreejs {

@@ -111,7 +111,7 @@ function searchFunction(citySearch, historySearch) {
 //"WARNING: Too many active WebGL contexts. Oldest context will be lost." - from searching too many cities
 // WebGL. Contexts are deleted by garbage collection (removing canvas seems to just remove rendering superficially - i think still stored in memory, more research here)
 
-//Animated cube and cylinder - 
+//Animated cube and cylinder -
 function weatherCage(iconID) {
   $('canvas').remove();
   const scene = new THREE.Scene();
