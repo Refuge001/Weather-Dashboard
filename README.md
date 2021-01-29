@@ -12,7 +12,7 @@
 2. Gaze in wide wonder at the joy that you have found.
 
 ---
-## ![My Weather Dashboard](/assets/img/weather.PNG)
+## ![My Weather Dashboard](/assets/img/weather.png)
 
 # https://refuge001.github.io/Weather-Dashboard/
 
