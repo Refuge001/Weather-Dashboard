@@ -15,7 +15,7 @@
 ---
 # Other Technologies Used
 1. Three.js - used to create the 3D space.
-2. Bootstrap
+2. Bootstrap - used to style the page.
 ---
 ## ![My Weather Dashboard](/assets/img/weather.PNG)
 ## ![My_Weather_Dashboard2](/assets/img/weather2.bmp)
