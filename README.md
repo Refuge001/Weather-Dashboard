@@ -20,6 +20,6 @@
 ## ![My Weather Dashboard](/assets/img/weather.PNG)
 ## ![My_Weather_Dashboard2](/assets/img/weather.bmp)
 
-# https://refuge001.github.io/Weather-Dashboard/
+# https://wjutterback.github.io/Weather-Dashboard/
 
 #### To check it all out, click the link above, and if you'd like to contribute, send me your ideas at uwill08@gmail.com.
