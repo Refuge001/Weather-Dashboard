@@ -18,7 +18,7 @@
 2. Bootstrap
 ---
 ## ![My Weather Dashboard](/assets/img/weather.PNG)
-## ![My_Weather_Dashboard2](/assets/img/weather.bmp)
+## ![My_Weather_Dashboard2](/assets/img/weather2.bmp)
 
 # https://wjutterback.github.io/Weather-Dashboard/
 
