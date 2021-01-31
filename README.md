@@ -12,7 +12,13 @@
 2. Gaze in wide wonder at the joy that you have found.
 
 ---
+---
+# Other Technologies Used
+1. Three.js - used to create the 3D space.
+2. Bootstrap
+---
 ## ![My Weather Dashboard](/assets/img/weather.PNG)
+## ![My_Weather_Dashboard2](/assets/img/weather.bmp)
 
 # https://refuge001.github.io/Weather-Dashboard/
 
